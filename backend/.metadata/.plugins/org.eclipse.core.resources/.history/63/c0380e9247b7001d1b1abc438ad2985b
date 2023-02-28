@@ -1,0 +1,46 @@
+package com.comment.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.comment.module.Comment;
+import com.comment.repository.CommentRepo;
+
+@Service
+public class CommentServicesImpl implements CommentServices{
+	@Autowired
+	private CommentRepo commentRepo;
+
+	@Override
+	public Comment addComment(Comment comment) {
+		Optional<Comment> cot = commentRepo.findById(comment.getCommentId());
+		if(cot.isEmpty()) {
+			commentRepo.save(comment);
+			return comment;
+		}else {
+			throw Exception("")
+		}
+		return comment;
+	}
+
+	@Override
+	public Comment addreplay(Comment comment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comment giveUpvote() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comment giveDownvote() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
