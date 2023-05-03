@@ -1,5 +1,0 @@
-package com.comment.services;
-
-public interface CommentImpl {
-
-}
