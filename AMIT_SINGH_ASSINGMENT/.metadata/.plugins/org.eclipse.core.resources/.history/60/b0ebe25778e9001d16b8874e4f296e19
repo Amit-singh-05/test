@@ -1,0 +1,5 @@
+package com.prospecta.dto;
+
+public class EntryDTO {
+
+}

@@ -1,0 +1,53 @@
+package com.prospecta.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.prospecta.dto.AllEntriesDTO;
+import com.prospecta.dto.EntryDTO;
+import com.prospecta.exception.EntryException;
+import com.prospecta.model.Entries;
+import com.prospecta.repository.EntryRepo;
+
+@Service
+public class EntryServicesImpl implements EntryServices{
+	@Autowired
+	private EntryRepo entryRepo;
+	
+	
+	@Override
+	public List<EntryDTO> getDataByCategory(String category) throws EntryException {
+        //url to be used => https://api.publicapis.org/entries
+		System.out.println("iiiiiiii**");
+		RestTemplate restTemp = new RestTemplate();
+		System.out.println("***");
+		AllEntriesDTO entries = restTemp.getForObject("https://api.publicapis.org/entries", AllEntriesDTO.class);
+		System.out.println("****");
+		List<EntryDTO> entryList = entries.getEntries().stream()
+				.filter(e -> e.getCategory().equals(category))
+				.map(e -> new EntryDTO(e.getAPI(), e.getDescription()))
+			    .collect(Collectors.toList());
+		
+		System.out.println("**");
+		
+//        List<EntryDTO> entryList = new ArrayList<>();
+//		
+//		for(Entries e : entries.getEntries()) {
+//			if(e.getCategory().equals(category)) {
+//				entryList.add(new EntryDTO(e.getAPI(), e.getDescription()));
+//			}
+//		}
+		
+		if(entryList.size() == 0) {
+			throw new EntryException("No entry found for category => " + category);
+		}
+		
+		return entryList;
+	}
+
+}
