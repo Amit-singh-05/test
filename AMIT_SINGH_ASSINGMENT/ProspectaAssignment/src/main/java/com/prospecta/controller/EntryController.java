@@ -35,12 +35,12 @@ public class EntryController {
 
 	}
 	
-//	@PostMapping("/saveNewEntry")
-//	public ResponseEntity<Entries> saveNewEntryHandler(@RequestBody Entries entries) throws EntryException{
-//		
-//		Entries savedEntry = entryServices.saveNewEntry(entries);
-//
-//		return new ResponseEntity<Entries>(savedEntry, HttpStatus.OK);
-//	}
+	@PostMapping("/saveNewEntry")
+	public ResponseEntity<Entries> saveNewEntryHandler(@RequestBody Entries entries) throws EntryException{
+		
+		Entries savedEntry = entryServices.saveNewEntry(entries);
+
+		return new ResponseEntity<Entries>(savedEntry, HttpStatus.OK);
+	}
 	
 }

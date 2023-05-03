@@ -10,5 +10,5 @@ public interface EntryServices {
 	
 	public List<EntryDTO> getDataByCategory(String category) throws EntryException;
 	
-//	public Entries saveNewEntry(Entries entries) throws EntryException;
+	public Entries saveNewEntry(Entries entries) throws EntryException;
 }
